@@ -1,10 +1,9 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 
 
 public class HelloWorld extends Application {
@@ -28,11 +27,15 @@ public class HelloWorld extends Application {
         Scene scene = new Scene(layout, 300, 250);
         primaryStage.setScene(scene);
 
-        //listens to window size
-        primaryStage.titleProperty().bind(
-                scene.widthProperty().asString().
-                        concat(" : ").
-                        concat(scene.heightProperty().asString()));
+        //listens to window size // use lambda notation
+        scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) ->
+                System.out.println("Width: " + newSceneWidth));
+        scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) ->
+                System.out.println("Height: " + newSceneHeight));
+        primaryStage.xProperty().addListener((observableValue, oldSceneX, newSceneX) ->
+                System.out.println("X: " + newSceneX));
+        primaryStage.yProperty().addListener((observableValue, oldSceneY, newSceneY) ->
+                System.out.println("Y: " + newSceneY));
         primaryStage.show();
 
     }
